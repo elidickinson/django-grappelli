@@ -18,7 +18,7 @@
                 $this.next().after(options.placeholder);
                 // lookup
                 lookup_id($this, options); // lookup when loading page
-                $this.bind("change focus keyup blur", function() { // id-handler
+                $this.bind("change keyup blur", function() { // id-handler
                     lookup_id($this, options);
                 });
             });
@@ -43,7 +43,7 @@
             app_label: grappelli.get_app_label(elem),
             model_name: grappelli.get_model_name(elem)
         }, function(data) {
-            text.text(data[0].label);
+            text.html(data[0].label);
         });
     };
     
