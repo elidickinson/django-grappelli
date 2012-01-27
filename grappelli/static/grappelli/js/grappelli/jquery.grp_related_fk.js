@@ -4,7 +4,8 @@
  */
 
 (function($){
-    
+    var previous_id = 0;
+
     var methods = {
         init: function(options) {
             options = $.extend({}, $.fn.grp_related_fk.defaults, options);
@@ -18,8 +19,13 @@
                 $this.next().after(options.placeholder);
                 // lookup
                 lookup_id($this, options); // lookup when loading page
-                $this.bind("change keyup blur", function() { // id-handler
-                    lookup_id($this, options);
+                previous_id = $this.val();
+                $this.bind("change keyup blur focus", function() { // id-handler
+                    if (previous_id != $this.val()) {
+                        lookup_id($this, options);
+                        previous_id = $this.val();    
+                    }
+                    
                 });
             });
         }
